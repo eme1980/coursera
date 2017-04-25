@@ -6,7 +6,10 @@
                 <h3 align=center>Our Lipsmacking Culinary Creations</h3>
             </div>
             <div class="media col-xs-12 col-sm-9 col-sm-pull-3">
-                <div class="media-left media-middle">
+                <div ng-if="!showDish">
+                    <h3>{{message}}</h3>
+                </div>
+                <div class="media-left media-middle" ng-if="showDish">
                     <a href="#">
                         <img class="media-object img-thumbnail" ng-src={{featdish.image}} alt="{{featdish.name}}">
                     </a>

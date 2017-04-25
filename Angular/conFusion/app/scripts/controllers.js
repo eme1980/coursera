@@ -7,8 +7,10 @@ angular.module('confusionApp')
             $scope.tab = 1;
             $scope.filtText = '';
             $scope.showDetails = false;
+            $scope.showMenu = true;
+            $scope.message = "Loading...";
 
-            $scope.dishes= menuFactory.getDishes();
+            $scope.dishes = menuFactory.getDishes().query();
 
                         
             $scope.select = function(setTab) {
@@ -54,7 +56,7 @@ angular.module('confusionApp')
                 
                 console.log($scope.feedback);
                 
-                if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
+                if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
                     $scope.invalidChannelSelection = true;
                     console.log('incorrect');
                 }
@@ -70,9 +72,10 @@ angular.module('confusionApp')
 
         .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
 
-            var dish= menuFactory.getDish(parseInt($stateParams.id,10));
+            $scope.showDish = true;
+            $scope.message="Loading ...";
             
-            $scope.dish = dish;
+            $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id,10)});
             
         }])
 
@@ -90,13 +93,16 @@ angular.module('confusionApp')
                 $scope.commentForm.$setPristine();
                 
                 $scope.mycomment = {rating:5, comment:"", author:"", date:""};
-            }
+            };
         }])
 
         .controller('IndexController', ['$scope', '$stateParams', 'menuFactory', 'corporateFactory', function($scope, $stateParams, menuFactory, corporateFactory) {
 
             $scope.executivechef = corporateFactory.getLeader(3);
-            $scope.featdish = menuFactory.getDish(0);
+            $scope.message = "Loading...";
+            $scope.showDish = true;
+
+            $scope.featdish = menuFactory.getDishes().get({id:0});
             $scope.featpromo = menuFactory.getPromotion(0);
 
         }])

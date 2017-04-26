@@ -28,7 +28,7 @@ gulp.task('clean', function() {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('usemin', 'imagemin','copyfonts');
+    gulp.start('usemin', 'imagemin','copyfonts', 'copydist');
 });
 
 gulp.task('usemin',['jshint'], function () {
@@ -38,6 +38,12 @@ gulp.task('usemin',['jshint'], function () {
         js: [ngannotate(),uglify(),rev()]
       }))
       .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('copydist', function() { //este es mio!!
+  return gulp.src('./dist/**/*')
+  .pipe(gulp.dest('../json-server/public/'))
+  .pipe(notify({ message: 'Data copied for distribution!' }));
 });
 
 // Images

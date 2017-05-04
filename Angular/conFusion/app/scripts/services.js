@@ -26,7 +26,7 @@ angular.module('confusionApp')
 
   }])
 
-  .service('contactFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+  .service('feedbackFactory', ['$resource', 'baseURL', function($resource, baseURL) {
 
     this.getFeedback = function() {
       return $resource(baseURL+'feedback/:id', null, {'save':{method: 'POST'}});

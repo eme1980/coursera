@@ -59,7 +59,7 @@ angular.module('confusionApp')
                         
         }])
 
-        .controller('FeedbackController', ['$scope', 'contactFactory', function($scope, contactFactory) {
+        .controller('FeedbackController', ['$scope', 'feedbackFactory', function($scope, feedbackFactory) {
             
             $scope.sendFeedback = function() {
                 
@@ -71,7 +71,7 @@ angular.module('confusionApp')
                 }
                 else {
                     $scope.invalidChannelSelection = false;
-                    contactFactory.getFeedback().save($scope.feedback).$promise.then(
+                    feedbackFactory.getFeedback().save($scope.feedback).$promise.then(
                         function(response) {
                             $scope.feedback = response;
                             $scope.message = "correct submit";

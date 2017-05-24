@@ -1,0 +1,43 @@
+<div *ngIf="artista" class="container">
+  <div class="row top-30 animated fadeIn fast">
+    <div class="col-md-3">
+      <img [src]="artista.images | sinfoto" class="img-rounded" [alt]="artista.name">
+    </div>
+    <div class="col-md-9">
+      <h1>{{artista.name}} <small>{{artista.popularity}}</small></h1>
+      <hr>
+      <a [routerLink]="['/buscar']" name="button" class="btn btn-outline-info puntero">Volver</a>
+      <a href="{{artista.external_urls?.spotify}}" target="_blank" name="button" class="btn btn-outline-success puntero">Ir a spotify</a>
+    </div>
+  </div>
+  <div *ngIf="pistas" class="row top-30 animated fadeIn">
+    <div class="col-md-12">
+      <h3>Top Tracks</h3>
+      <div class="table-responsive">
+        <table class="table">
+          <tr *ngFor="let track of pistas; let i = index">
+            <td>
+              {{i + 1}}
+            </td>
+            <td>
+              <img [src]="track.album?.images | sinfoto" class="img-fluid" width="50" [alt]="track.album.name">
+            </td>
+            <td>
+              {{track.name}}
+            </td>
+            <td>
+              {{track.popularity}}
+            </td>
+            <td align="right">
+              <!-- <audio controls>
+                <source [src]="track.preview_url">
+                  Tu navegador no soporta audios!
+              </audio> -->
+              <iframe [src]="track.uri | domseguro:'https://open.spotify.com/embed?uri='" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
